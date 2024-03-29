@@ -3,6 +3,8 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker'; // Import DateTimePicker
 
+
+
 const TaskFilter = ({ onFilter }) => {
   const [assignee, setAssignee] = useState('');
   const [priority, setPriority] = useState('');
@@ -10,7 +12,7 @@ const TaskFilter = ({ onFilter }) => {
   const [endDate, setEndDate] = useState(undefined);
   const [showStartDatePicker, setShowStartDatePicker] = useState(false); // State for showing start date picker
   const [showEndDatePicker, setShowEndDatePicker] = useState(false); // State for showing end date picker
-
+  const [open, setOpen] = useState(false);
   const handleAssigneeFilter = (value) => {
     setAssignee(value);
     handleFilter(value, priority, startDate, endDate);
@@ -62,6 +64,7 @@ const TaskFilter = ({ onFilter }) => {
           onChangeText={handleAssigneeFilter}
           style={styles.input}
         />
+       
         <Picker
           selectedValue={priority}
           onValueChange={handlePriorityFilter}
@@ -95,18 +98,21 @@ const TaskFilter = ({ onFilter }) => {
           />
         )}
       </View>
-      <View style={{flexDirection:"row",alignItems:"center"}}>
+      <View style={{flexDirection:"row",alignItems:"center",marginVertical:20}}>
         <Text style={{ marginRight: 10 }}>Sort By:</Text>
+        
         <Picker
           selectedValue={priority}
           onValueChange={handlePriorityFilter}
           style={styles.picker}
+          
         >
-          <Picker.Item label="All Priorities" value="" />
+          <Picker.Item label="All Priorities" value="" style={{paddingBottom:100}}/>
           <Picker.Item label="P0" value="P0" />
           <Picker.Item label="P1" value="P1" />
           <Picker.Item label="P2" value="P2" />
         </Picker>
+    
       </View>
     </View>
   );
@@ -121,7 +127,7 @@ const styles = StyleSheet.create({
     justifyContent:"space-around"
   },
   input: {
-    margin: 10,
+   
     height: 40,
     width: 150,
     backgroundColor: 'whitesmoke',
@@ -129,10 +135,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   picker: {
-    height: 20,
+    paddingHorizontal: 5,
+    paddingVertical:0,
+    minHeight: 37,
     width: 150,
     backgroundColor: 'whitesmoke',
-    borderRadius: 25,
+   
   },
   datePicker: {
     margin: 10,
@@ -140,7 +148,7 @@ const styles = StyleSheet.create({
     width: 150,
     backgroundColor: 'whitesmoke',
     borderRadius: 5,
-    textAlign: 'center',
+    paddingHorizontal:15,
     textAlignVertical: 'center',
   },
 });
